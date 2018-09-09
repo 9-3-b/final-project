@@ -13,10 +13,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
+mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds251112.mlab.com:51112/final-project');
+
 // PRODUCTION ONLY
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname + '/client/build/index.html'));
-// });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
 
 // Development mode port
 const port = process.env.PORT || 5000;
