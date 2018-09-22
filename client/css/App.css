@@ -32,6 +32,8 @@ text-align: center;
  border: 1px solid #000;
  border-radius: 4px;
  padding: 20px;
+ color: black;
+ background-color:  #00cccc;
 }
 .Overlay {
  position: fixed;
@@ -63,16 +65,17 @@ h1{
   color: white;
   font-size: 60px;
   font-family: 'Lobster', cursive;
-  text-shadow: 3px 2px lime;
+  text-shadow: 3px 2px #00cccc;
   -webkit-text-stroke: 1px grey;
+  background-color: black;
 }
 body{
-  background-color: rgb(49, 63, 63);
+  background-color:  white;
   color: white;
 }
 .btn-danger{
   color: white;
-  background-color: white;
+  background-color: red;
     border-color: white;
     padding: 2px;
     margin: 2px;
@@ -84,15 +87,30 @@ body{
   padding: 2px;
 }
 .nav-tabs>li>a {
-  margin-right: 2px;
+  
   line-height: 1.42857143;
   border: 1px solid transparent;
   border-radius: 4px 4px 0 0;
   color: white;
-  margin: 0px 10px 15px 0px;
+  margin: 2px 2px 0px 2px;
+  background-color: #000;
+  float:none;
+    display:inline-block;
+    zoom:1;
+  font-family: 'Lobster', cursive;
+  font-size: 16px;
 }
+.nav-tabs {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  background-color: #00cccc;
+  font-style: 'Lobster', cursive;
+    font-size: 14px;
+}
+
 a {
-  color: lime;
+  color: #00cccc;
   text-decoration: none;
 }
 
@@ -123,18 +141,19 @@ table {
   border-collapse: collapse;
   border: 1px solid #eee;
   border-bottom: 2px solid #00cccc;
-  box-shadow: 0px 0px 20px rgba(0,0,0,0.10),
-     0px 10px 20px rgba(0,0,0,0.05),
-     0px 20px 20px rgba(0,0,0,0.05),
-     0px 30px 20px rgba(0,0,0,0.05);
+  box-shadow: 0px 0px 20px grey,
+     0px 05px 10px grey,
+     0px 10px 10px #00cccc,
+     0px 20px 10px aqua;
   tr {
      &:hover {
-      background: #f4f4f4;
+      background-color: #f4f4f4;
       
       td {
         color: #555;
       }
     }
+  
   }
   th, td {
     color: #999;
@@ -149,5 +168,17 @@ table {
     font-size: 12px;
     &.last {
       border-right: none;
-    }
   }
+}
+  .btn-success{
+    background-color: #00cccc;
+  }
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+ }
