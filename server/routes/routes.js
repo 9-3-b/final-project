@@ -1,3 +1,9 @@
+// //server/routes/routes.js
+// var express = require('express');
+// var router = express.Router();
+// var bodyParser = require('body-parser');
+
+
 /**SADRENOTES**********************************************/
 /* Simple node authentication and session using 
 /* MongoDB/NOSQL.
@@ -16,10 +22,10 @@ var port = process.env.PORT || 8080; //listening port for testing, remove in rea
 var session = require('express-session'); //session data
 var mongoose = require('mongoose'); //setup for MongoDB useage
 var MongoDBStore = require('connect-mongodb-session')(session); //session data
-var URI = 'mongodb://USER###:PASSWORD###@ds251022.mlab.com:51022/collection###'; //mlab info for collections
+var URI = 'mongodb://sadvarsco:themaxx1234@ds251022.mlab.com:51022/expenses'; //mlab info for collections
 var passport = require('passport'); //used for session and authentication
 var LocalStrategy = require('passport-local').Strategy; //used for session and authentication
-
+var Expense = require('../../models/Expense');
 
 
 /**********************************************************/
@@ -112,7 +118,7 @@ passport.use(new LocalStrategy(function (username, pword, done) {
     '_id name userName password',
     function (err, user) {
       if (err) return handleError(err)
-      return done(null, user._id);
+      return done(null, user);
     }
   );
 }));
@@ -158,26 +164,24 @@ let User = require('./user');
 /**********************************************************/
 router.get('/', function (req, res, next) {
   if (req.isAuthenticated()) {
-    console.log('user is authenticated');
+    console.log('user is authenticated with the following ID');
+    console.log(req.user._id);
+
+    //ID of logged in user
+    pID= req.user._id;
+    res.render('index', {pID});
   } else {
     console.log('user is not authenticated');
+    res.redirect('/login');
   }
-  User.find({}, function (err, person) {
-    if (err) return handleError(err);
-    res.render('index');
-  });
+  // User.find({}, function (err, person) {
+  //   if (err) return handleError(err);
+  //   res.render('index');
+  // });
 });
 
 router.get('/index', function (req, res, next) {
-  if (req.isAuthenticated()) {
-    console.log('user is authenticated');
-  } else {
-    console.log('user is not authenticated');
-  }
-  User.find({}, function (err, person) {
-    if (err) return handleError(err);
-    res.render('index');
-  });
+  res.redirect('/');
 });
 
 /**********************************************************/
@@ -233,7 +237,7 @@ router.post('/newuser', (req, res) => {
       } else {
         console.log('User successfully saved.');
         //logs user in after creation and redirects to main page
-        req.login(userData._id, function (err) {
+        req.login(userData, function (err) {
           res.redirect('/');
         });
       }
@@ -267,6 +271,12 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/failed'
 }));
 
+
+router.get('/failed', function (req, res, next) {
+  res.render('failed', {
+    title: 'failed'
+  });
+});
 //Logout
 // destroys any session, redirects to index page
 router.get('/logout', function (req, res) {
@@ -275,7 +285,66 @@ router.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
+
 /**********************************************************/
 /* END END END
 /**********************************************************/
+
+
+router.get('/', function(req, res){
+  res.render('index')
+});
+router.route('/insert')
+.post(function(req,res) {
+ var expense = new Expense();
+  expense.description = req.body.desc;
+  expense.amount = req.body.amount;
+  expense.month = req.body.month;
+  expense.year = req.body.year;
+expense.save(function(err) {
+      if (err)
+        res.send(err);
+      res.send('Expense successfully added!');
+  });
+})
+router.route('/update')
+.post(function(req, res) {
+ const doc = {
+     description: req.body.description,
+     amount: req.body.amount,
+     month: req.body.month,
+     year: req.body.year
+ };
+ console.log(doc);
+  Expense.update({_id: req.body._id}, doc, function(err, result) {
+      if (err)
+        res.send(err);
+      res.send('Expense successfully updated!');
+  });
+});
+router.get('/delete', function(req, res){
+ var id = req.query.id;
+ Expense.find({_id: id}).remove().exec(function(err, expense) {
+  if(err)
+   res.send(err)
+  res.send('Expense successfully deleted!');
+ })
+});
+router.get('/getAll',function(req, res) {
+ var monthRec = req.query.month;
+ var yearRec = req.query.year;
+ if(monthRec && monthRec != 'All'){
+  Expense.find({$and: [ {month: monthRec}, {year: yearRec}]}, function(err, expenses) {
+   if (err)
+    res.send(err);
+   res.json(expenses);
+  });
+ } else {
+  Expense.find({year: yearRec}, function(err, expenses) {
+   if (err)
+    res.send(err);
+   res.json(expenses);
+  });
+ }
+});
 module.exports = router;
