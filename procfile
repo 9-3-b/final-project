@@ -1,1 +1,1 @@
-web: node login.ejs
+web: node App.js
