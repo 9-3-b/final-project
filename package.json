@@ -25,5 +25,9 @@
   "scripts": {
     "webpack": "webpack",
     "start": "npm run webpack && nodemon --exec babel-node -- bin/www"
+  },
+  "engines": {
+    "node": "8.9.1",
+    "npm": "6.4.1"
   }
 }
