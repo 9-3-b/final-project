@@ -10815,6 +10815,7 @@ var _routes2 = _interopRequireDefault(_routes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //client/index.js
+
 _reactDom2.default.render(_react2.default.createElement(
   _reactRouterDom.HashRouter,
   null,
