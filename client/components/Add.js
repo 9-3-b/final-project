@@ -5,7 +5,8 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 var querystring = require('querystring');
-class Add extends React.Component {
+
+export class Add extends React.Component {
 constructor() {
       super();
 this.state = {
@@ -22,7 +23,11 @@ this.handleSelectChange = this.handleSelectChange.bind(this);
       this.insertNewExpense = this.insertNewExpense.bind(this);
       this.openModal = this.openModal.bind(this);
       this.closeModal = this.closeModal.bind(this);
+       
     }
+
+  
+
 openModal() {
       this.setState({
         modalIsOpen: true

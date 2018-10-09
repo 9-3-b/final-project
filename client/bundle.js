@@ -34639,6 +34639,9 @@ var App = function (_React$Component) {
 
     _this.state = { selectedMonth: 'All', selectedYear: 2018, data: [], activeTab: 2018 };
     _this.getData = _this.getData.bind(_this);
+    _this.totals = [0, 10];
+    _this.amount = _react2.default.createRef;
+
     return _this;
   }
 
@@ -34682,9 +34685,74 @@ var App = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
+      //   let amounts = [];
+
+
+      //   function getSum(total, num) {
+      //     return total + num;
+      // };
+
+      //   function getTotal() {
+      //     return <td>{amounts.reduce(getSum)}</td>;
+      // };
+      var data = this.state.data;
+
+      var totalPrice = 0;
+
+      var items = data && data.map(function (exp) {
+        totalPrice += exp.amount;
+
+        return _react2.default.createElement(
+          'tr',
+          null,
+          _react2.default.createElement('td', { className: 'counterCell' }),
+          _react2.default.createElement(
+            'td',
+            { className: 'desc-col' },
+            exp.description
+          ),
+          _react2.default.createElement(
+            'td',
+            { className: 'button-col', id: 'amt', refs: _this2.amount },
+            exp.amount
+          ),
+          _react2.default.createElement(
+            'td',
+            { className: 'button-col' },
+            exp.month
+          ),
+          _react2.default.createElement(
+            'td',
+            { className: 'button-col' },
+            exp.year
+          ),
+          _react2.default.createElement(
+            'td',
+            { className: 'button-col' },
+            _react2.default.createElement(_Update2.default, { expense: exp })
+          ),
+          _react2.default.createElement(
+            'td',
+            { className: 'button-col' },
+            _react2.default.createElement(_Delete2.default, { expense: exp })
+          )
+        );
+      });
+
       return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(
+          'a',
+          { href: '/login' },
+          _react2.default.createElement(
+            'button',
+            null,
+            'Log Out'
+          )
+        ),
         _react2.default.createElement(
           _reactBootstrap.Tabs,
           { activeKey: this.state.activeTab, onSelect: this.handleSelect },
@@ -34760,43 +34828,18 @@ var App = function (_React$Component) {
           _react2.default.createElement(
             'tbody',
             null,
-            this.state.data.map(function (exp) {
-              return _react2.default.createElement(
-                'tr',
+            items,
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Total: ',
+              _react2.default.createElement(
+                'span',
                 null,
-                _react2.default.createElement('td', { className: 'counterCell' }),
-                _react2.default.createElement(
-                  'td',
-                  { className: 'desc-col' },
-                  exp.description
-                ),
-                _react2.default.createElement(
-                  'td',
-                  { className: 'button-col' },
-                  exp.amount
-                ),
-                _react2.default.createElement(
-                  'td',
-                  { className: 'button-col' },
-                  exp.month
-                ),
-                _react2.default.createElement(
-                  'td',
-                  { className: 'button-col' },
-                  exp.year
-                ),
-                _react2.default.createElement(
-                  'td',
-                  { className: 'button-col' },
-                  _react2.default.createElement(_Update2.default, { expense: exp })
-                ),
-                _react2.default.createElement(
-                  'td',
-                  { className: 'button-col' },
-                  _react2.default.createElement(_Delete2.default, { expense: exp })
-                )
-              );
-            })
+                totalPrice
+              )
+            )
           )
         )
       );
@@ -35700,6 +35743,7 @@ module.exports = function spread(callback) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.Add = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -35730,7 +35774,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var querystring = __webpack_require__(155);
 
-var Add = function (_React$Component) {
+var Add = exports.Add = function (_React$Component) {
   _inherits(Add, _React$Component);
 
   function Add() {
@@ -35752,6 +35796,7 @@ var Add = function (_React$Component) {
     _this.insertNewExpense = _this.insertNewExpense.bind(_this);
     _this.openModal = _this.openModal.bind(_this);
     _this.closeModal = _this.closeModal.bind(_this);
+
     return _this;
   }
 
@@ -47731,6 +47776,7 @@ Modal.defaultProps = {
   isOpen: false,
   portalClassName: portalClassName,
   bodyOpenClassName: bodyOpenClassName,
+  role: "dialog",
   ariaHideApp: true,
   closeTimeoutMS: 0,
   shouldFocusAfterRender: true,
@@ -48108,8 +48154,7 @@ var ModalPortal = function (_Component) {
           className: this.buildClassName("overlay", overlayClassName),
           style: _extends({}, overlayStyles, this.props.style.overlay),
           onClick: this.handleOverlayOnClick,
-          onMouseDown: this.handleOverlayOnMouseDown,
-          "aria-modal": "true"
+          onMouseDown: this.handleOverlayOnMouseDown
         },
         _react2.default.createElement(
           "div",

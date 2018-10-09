@@ -1,5 +1,5 @@
 /*client/css/App.css*/
-.button-col {
+/*.button-col {
   width:100px;
   text-align:center;
 }
@@ -69,10 +69,7 @@ h1{
   -webkit-text-stroke: 1px grey;
   background-color: black;
 }
-body{
-  background-color:  white;
-  color: white;
-}
+
 .btn-danger{
   color: white;
   background-color: red;
@@ -116,7 +113,7 @@ a {
 
 /*test*/
 
- table {
+ /*table {
   border-spacing: 0.5rem;
   margin: 25px 50px 75px 100px;
   
@@ -136,6 +133,8 @@ td:nth-child(6) { background: hsl(200, 99%, 50%); }
 
 table {
   background-color: black;
+  background-image: url ("https://www.plandesigndevelop.com/wp-content/uploads/2018/10/rawpixel-602154-unsplash.jpg");
+
   font-family: 'Arial';
   margin: 25px auto;
   border-collapse: collapse;
@@ -182,3 +181,114 @@ table {
     color: white;
     text-align: center;
  }
+*/
+
+body {
+  background-image: url("https://www.plandesigndevelop.com/wp-content/uploads/2018/10/rawpixel-602154-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+table {
+  width: 75%;
+  margin-left:auto; 
+  margin-right:auto;
+  border: 1px solid black;
+  box-shadow: 10px 10px #85bb65;
+}
+
+th {
+  height: 50px;
+  background-color: black;
+  color: white;
+  font-family: 'Lobster';
+  font-size: 18px;
+  vertical-align: bottom;
+  text-align: left;
+}
+
+td {
+  height: 50px;
+  vertical-align: bottom;
+  background-color: white;
+  
+  padding: 2px 2px 10px 2px;
+  font-family: 'Product Sans';
+}
+table:last-child { 
+  background:black; 
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  font-size: 60px;
+  font-family: 'Lobster', cursive;
+  text-shadow: 3px 2px #85bb65;
+  -webkit-text-stroke: 1px #A2B594;
+  background-color: black;
+}
+
+.nav-tabs {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  font-family: 'Lobster', cursive;
+  width: 75%;
+  margin-left:auto; 
+  margin-right:auto;
+  box-shadow: 0px 5px #85bb65;
+
+}
+
+p {
+  font-family: 'Product Sans';
+  font-size: 16px;
+  color: #85bb65;
+  text-decoration: none;
+}
+
+
+
+button {
+  background-color: #85bb65;
+  font-family: 'Product Sans';
+}
+
+/* unvisited link */
+a:link {
+  color: black;
+}
+
+/* visited link */
+a:visited {
+  color: grey;
+}
+
+/* mouse over link */
+a:hover {
+  color: white;
+}
+
+/* selected link */
+a:active {
+  color: black;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: red;
+  border-color: red;
+}
+
+.btn-warning {
+  color: #fff;
+  background-color: #85bb65;
+  border-color: #85bb65;
+}
+
+.glyphicon {
+  color: white;
+}
