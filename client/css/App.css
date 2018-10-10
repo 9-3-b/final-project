@@ -239,7 +239,7 @@ h1 {
   width: 75%;
   margin-left:auto; 
   margin-right:auto;
-  box-shadow: 0px 5px #85bb65;
+  
 
 }
 
@@ -249,8 +249,6 @@ p {
   color: #85bb65;
   text-decoration: none;
 }
-
-
 
 button {
   background-color: #85bb65;
@@ -287,6 +285,14 @@ a:active {
   color: #fff;
   background-color: #85bb65;
   border-color: #85bb65;
+}
+
+.btn-success {
+  float: right;
+}
+button {
+  float: right;
+  margin-right: 45px;
 }
 
 .glyphicon {
