@@ -278,11 +278,12 @@ router.get('/failed', function (req, res, next) {
   });
 });
 //Logout
-// destroys any session, redirects to index page
+// destroys any session, redirects to login page
 router.get('/logout', function (req, res) {
   req.logout();
   req.session.destroy();
-  res.redirect('/');
+  db.disconnect();
+  res.redirect('/login');
 });
 
 
@@ -294,9 +295,11 @@ router.get('/logout', function (req, res) {
 router.get('/', function(req, res){
   res.render('index')
 });
+
 router.route('/insert')
 .post(function(req,res) {
  var expense = new Expense();
+  expense.userID = req.user._id;
   expense.description = req.body.desc;
   expense.amount = req.body.amount;
   expense.month = req.body.month;
@@ -322,6 +325,7 @@ router.route('/update')
       res.send('Expense successfully updated!');
   });
 });
+
 router.get('/delete', function(req, res){
  var id = req.query.id;
  Expense.find({_id: id}).remove().exec(function(err, expense) {
@@ -330,17 +334,22 @@ router.get('/delete', function(req, res){
   res.send('Expense successfully deleted!');
  })
 });
+
 router.get('/getAll',function(req, res) {
+
+ var userRec = req.user._id;
+ console.log("userRec");
+ console.log(userRec);
  var monthRec = req.query.month;
  var yearRec = req.query.year;
  if(monthRec && monthRec != 'All'){
-  Expense.find({$and: [ {month: monthRec}, {year: yearRec}]}, function(err, expenses) {
+  Expense.find({$and: [ {month: monthRec}, {year: yearRec}, {userID: userRec}]}, function(err, expenses) {
    if (err)
     res.send(err);
    res.json(expenses);
   });
  } else {
-  Expense.find({year: yearRec}, function(err, expenses) {
+  Expense.find({$and: [ {year: yearRec}, {userID: userRec}]}, function(err, expenses) {
    if (err)
     res.send(err);
    res.json(expenses);
