@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
 
+console.log("connection error 4");
 mongoose.connect(MGDBURL,{ useNewUrlParser: true });
 
 app.use('/', router);

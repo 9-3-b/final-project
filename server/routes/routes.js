@@ -16,6 +16,7 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
+var dbError = false; //true on db connection failure
 var bodyParser = require('body-parser');
 var path = require('path');
 var port = process.env.PORT || 8080; //listening port for testing, remove in real case
@@ -57,6 +58,7 @@ var store = new MongoDBStore({
 });
 
 // Connect to database
+console.log("connection error 3");
 store.on('connected', function () {
   store.client; // The underlying MongoClient object from the MongoDB driver
 });
@@ -69,7 +71,12 @@ store.on('error', function (error) {
 
 //database connection, probably rejected because of previous connection
 mongoose.connect(MGDBURL, function (err) {
-  if (err) throw err;
+  console.log("connection error 2");
+  if (err) {
+    dbError = true;
+    throw err;
+  }
+  
   console.log('Successfully connected');
 });
 
@@ -78,6 +85,7 @@ mongoose.Promise = global.Promise;
 //Get the default connection
 var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
+console.log("connection error 1");
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
@@ -163,6 +171,7 @@ let User = require('./user');
 /* Gets.Post.Updates.Deletes
 /**********************************************************/
 router.get('/', function (req, res, next) {
+  if (dbError==true) res.redirect('/failed');
   if (req.isAuthenticated()) {
     console.log('user is authenticated with the following ID');
     console.log(req.user._id);
