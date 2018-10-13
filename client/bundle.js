@@ -34639,8 +34639,6 @@ var App = function (_React$Component) {
 
     _this.state = { selectedMonth: 'All', selectedYear: 2018, data: [], activeTab: 2018 };
     _this.getData = _this.getData.bind(_this);
-    _this.totals = [0, 10];
-    _this.amount = _react2.default.createRef;
 
     return _this;
   }
@@ -34687,16 +34685,6 @@ var App = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      //   let amounts = [];
-
-
-      //   function getSum(total, num) {
-      //     return total + num;
-      // };
-
-      //   function getTotal() {
-      //     return <td>{amounts.reduce(getSum)}</td>;
-      // };
       var data = this.state.data;
 
       var totalPrice = 0;
@@ -34744,15 +34732,6 @@ var App = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(
-          'a',
-          { href: '/login' },
-          _react2.default.createElement(
-            'button',
-            null,
-            'Log Out'
-          )
-        ),
         _react2.default.createElement(
           _reactBootstrap.Tabs,
           { activeKey: this.state.activeTab, onSelect: this.handleSelect },
@@ -34833,7 +34812,7 @@ var App = function (_React$Component) {
             _react2.default.createElement(
               'th',
               null,
-              'Total: ',
+              'Total: $',
               _react2.default.createElement(
                 'span',
                 null,
