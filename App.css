@@ -133,7 +133,7 @@ td:nth-child(6) { background: hsl(200, 99%, 50%); }
 
 table {
   background-color: black;
-  background-image: url ("https://www.plandesigndevelop.com/wp-content/uploads/2018/10/rawpixel-602154-unsplash.jpg");
+  /*background-image: url ("https://www.plandesigndevelop.com/wp-content/uploads/2018/10/rawpixel-602154-unsplash.jpg");*/
 
   font-family: 'Arial';
   margin: 25px auto;
