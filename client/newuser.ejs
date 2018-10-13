@@ -5,6 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/App.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
@@ -14,11 +17,13 @@
 </head>
 
 
-<body>
-    <div style="max-width: 60%; position: center; left: 25%; align-content: center; padding: 5%; margin-top: 2rem"
-        class="card col-sm-8 text-left bpost">
-        <a href="/login">Already Registered </a>
-        <div class="col-md-4 col-md-offset-4">
+<body  style="background-image: url(https://cdn.pixabay.com/photo/2017/08/30/07/56/money-2696228_960_720.jpg); background-size: cover">
+    <h1>Analyze My Bills</h1>
+    <div style="max-width: 40%; position: center; left: 30%; align-content: center; padding: 5%; margin-top: 2rem; font-size: 2em;"
+        class="card">
+        <p><h2>Create New Account</h2></p>
+        
+        <div class="">
             <form class="form-signin" action="newuser" method="POST" onsubmit="return valUser(this);">
                 <div class="form-group">
                     <label for="firstName">First Name: </label>
@@ -39,6 +44,9 @@
                 <div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
+                <br>
+                <br>
+                <p>Already Registered <a href="/login"> Visit the Login Page</a></p>
             </form>
         </div>
     </div>

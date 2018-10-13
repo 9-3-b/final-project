@@ -17,7 +17,7 @@ function valUser(form) {
     }
     re = /^\w+$/;
     if (!re.test(form.lastName.value)) {
-        alert("Error: LAst Name must contain only letters!");
+        alert("Error: Last Name must contain only letters!");
         form.username.focus();
         return false;
     }
@@ -65,6 +65,6 @@ function valUser(form) {
         }
     }
 
-    alert("You entered a valid password: " + form.password.value);
+    alert("Thank you for creating your account, you will be logged in automatically");
     return true;
 }

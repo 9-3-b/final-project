@@ -22,7 +22,7 @@ var port = process.env.PORT || 8080; //listening port for testing, remove in rea
 var session = require('express-session'); //session data
 var mongoose = require('mongoose'); //setup for MongoDB useage
 var MongoDBStore = require('connect-mongodb-session')(session); //session data
-var URI = 'mongodb://sadvarsco:themaxx1234@ds251022.mlab.com:51022/expenses'; //mlab info for collections
+var MGDBURL = 'mongodb://sadvarsco:themaxx1234@ds251022.mlab.com:51022/expenses'; //mlab info for collections
 var passport = require('passport'); //used for session and authentication
 var LocalStrategy = require('passport-local').Strategy; //used for session and authentication
 var Expense = require('../../models/Expense');
@@ -52,7 +52,7 @@ app.use('/', router);
 /**********************************************************/
 //setup collective for session storing
 var store = new MongoDBStore({
-  uri: 'mongodb://sadvarsco:themaxx1234@ds251022.mlab.com:51022/expenses',
+  uri: MGDBURL,
   collection: 'mySessions'
 });
 
@@ -68,7 +68,7 @@ store.on('error', function (error) {
 });
 
 //database connection, probably rejected because of previous connection
-mongoose.connect(URI, function (err) {
+mongoose.connect(MGDBURL, function (err) {
   if (err) throw err;
   console.log('Successfully connected');
 });
